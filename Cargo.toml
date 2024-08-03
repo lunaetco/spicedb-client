@@ -1,0 +1,23 @@
+[package]
+name = "spicedb-grpc"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "gen"
+required-features = ["gen"]
+
+[features]
+default = []
+
+gen = ["tonic-build"]
+
+[dependencies]
+prost = "0.13.1"
+prost-types = "0.13.1"
+tonic = { version = "0.12.1", default-features = false, features = [
+    "channel",
+    "codegen",
+    "prost",
+] }
+tonic-build = { version = "0.12.1", optional = true }
