@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+{
+  "name": "spicedb-grpc",
+
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "spicedb-grpc",
+  "workspaceFolder": "/workspaces/spicedb-grpc",
+  "remoteUser": "vscode",
+
+  "postCreateCommand": "zed context set default spicedb:50051 spicedb --insecure",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dotenv.dotenv-vscode",
+        "esbenp.prettier-vscode",
+        "fill-labs.dependi",
+        "foxundermoon.shell-format",
+        "ms-azuretools.vscode-docker",
+        "rust-lang.rust-analyzer",
+        "zxh404.vscode-proto3"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.inlineSuggest.enabled": true,
+        "files.autoSave": "afterDelay",
+        "prettier.prettierPath": "/usr/local/share/nvm/current/lib/node_modules/prettier",
+        "shellformat.path": "/usr/bin/shfmt"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+services:
+  spicedb-grpc:
+    image: ghcr.io/lunaetco/devcontainer
+
+    environment:
+      # Apps
+      DATABASE_URL: postgresql://postgres:postgres@postgres/postgres
+
+      # PostgreSQL psql client
+      PGHOST: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+
+      # Zed CLI
+      ZED_KEYRING_PASSWORD: spicedb
+
+      # spicedb-grpc tests
+      SPICEDB_URL: http://spicedb:50051
+      SPICEDB_PRESHARED_KEY: spicedb
+
+    volumes:
+      - ..:/workspaces/spicedb-grpc:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  postgres:
+    image: ghcr.io/lunaetco/postgres:main
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  spicedb-migrate:
+    depends_on:
+      postgres:
+        condition: service_started
+    image: ghcr.io/authzed/spicedb
+    command: >
+      migrate head
+      --datastore-engine=postgres
+      --datastore-conn-uri="postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable"
+
+  spicedb:
+    depends_on:
+      spicedb-migrate:
+        condition: service_completed_successfully
+    image: ghcr.io/authzed/spicedb
+    volumes:
+      - ./bootstrap.yaml:/var/lib/spicedb/bootstrap.yaml
+    command: >
+      serve
+      --datastore-engine=postgres
+      --datastore-conn-uri="postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable"
+      --datastore-bootstrap-files=/var/lib/spicedb/bootstrap.yaml
+      --grpc-preshared-key=spicedb
+
+volumes:
+  postgres-data:

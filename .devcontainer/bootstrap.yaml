@@ -1,0 +1,10 @@
+schema: |
+  definition user {}
+
+  definition document {
+      relation viewer: user
+      relation editor: user
+  }
+
+relationships: |
+  document:doc1#viewer@user:user1
