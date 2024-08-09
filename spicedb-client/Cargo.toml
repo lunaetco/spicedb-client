@@ -1,0 +1,22 @@
+[package]
+name = "spicedb-client"
+description = "Ergonomic Rust gRPC client for SpiceDB"
+
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+
+[dependencies]
+bytes.workspace = true
+futures = { workspace = true, features = ["std"] }
+http.workspace = true
+prost.workspace = true
+prost-types.workspace = true
+spicedb-grpc = { path = "../spicedb-grpc" }
+thiserror.workspace = true
+tonic.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }
