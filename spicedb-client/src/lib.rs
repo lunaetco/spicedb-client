@@ -3,6 +3,8 @@
 pub mod builder;
 mod client;
 pub mod result;
+#[cfg(feature = "futures")]
+pub mod stream;
 pub mod types;
 
 pub use crate::client::*;
