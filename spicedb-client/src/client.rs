@@ -13,7 +13,7 @@ use tonic::{
     metadata::{Ascii, MetadataValue},
     service::{interceptor::InterceptedService, Interceptor},
     transport::Channel,
-    Request, Status,
+    Request, Status, Streaming,
 };
 
 use crate::result::Result;
@@ -100,14 +100,14 @@ impl SpicedbClient {
     pub async fn read_relationships(
         &mut self,
         request: ReadRelationshipsRequest,
-    ) -> Result<ReadRelationshipsResponse> {
+    ) -> Result<Streaming<ReadRelationshipsResponse>> {
         let stream = self
             .permissions
             .read_relationships(request)
             .await?
             .into_inner();
 
-        todo!()
+        Ok(stream)
     }
 
     /// Atomically write and/or delete a set of specified relationships. An
@@ -123,7 +123,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Atomically bulk delete all relationships matching the provided filter.
@@ -140,7 +140,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Determine, for a given resource, whether a subject computes to having a
@@ -155,7 +155,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Evaluate the given list of permission checks.
@@ -169,7 +169,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Reveal the graph structure for a resource's permission or relation. This
@@ -185,7 +185,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Return all the resources of a given type that a subject can access
@@ -193,14 +193,14 @@ impl SpicedbClient {
     pub async fn lookup_resources(
         &mut self,
         request: LookupResourcesRequest,
-    ) -> Result<LookupResourcesResponse> {
+    ) -> Result<Streaming<LookupResourcesResponse>> {
         let response = self
             .permissions
             .lookup_resources(request)
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Return all the subjects of a given type that have access whether via a
@@ -208,14 +208,14 @@ impl SpicedbClient {
     pub async fn lookup_subjects(
         &mut self,
         request: LookupSubjectsRequest,
-    ) -> Result<LookupSubjectsResponse> {
+    ) -> Result<Streaming<LookupSubjectsResponse>> {
         let response = self
             .permissions
             .lookup_subjects(request)
             .await?
             .into_inner();
 
-        todo!()
+        Ok(response)
     }
 
     /// Watch the database for mutations.
@@ -228,10 +228,10 @@ impl SpicedbClient {
     ///     https://authzed.com/docs/spicedb/concepts/datastores#memdb
     /// [postgres]:
     ///     https://authzed.com/docs/spicedb/concepts/datastores#postgresql
-    pub async fn watch(&mut self, request: WatchRequest) -> Result<WatchResponse> {
+    pub async fn watch(&mut self, request: WatchRequest) -> Result<Streaming<WatchResponse>> {
         let response = self.watch.watch(request).await?.into_inner();
 
-        todo!()
+        Ok(response)
     }
 }
 
