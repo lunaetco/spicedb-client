@@ -1,11 +1,11 @@
 # spicedb-client
 
-Ergonomic Rust client for the SpiceDB gRPC API.
+Ergonomic(-ish) Rust client for the SpiceDB gRPC API.
 
 ## Features
 
-- Asynchronous gRPC client for SpiceDB via Tonic
-- Generated from the official AuthZed SpiceDB protobuf definitions
+- More ergonomic wrappers around the auto-generated Tonic gRPC APIs
+- Builder traits to simplify creating requests.
 
 ## Installation
 
@@ -20,6 +20,7 @@ spicedb-client = "0.1.0"
 
 ```rust
 use spicedb_client::SpicedbClient;
+use spicedb_client::reader::*;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -34,7 +35,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap();
 
     // Read schema
-    let (schema, _token) = client.read_schema().await.unwrap();
+    let response = client.read_schema().await.unwrap();
+    let schema = response.schema_text();
 
     println!("Schema: {:?}", schema);
 

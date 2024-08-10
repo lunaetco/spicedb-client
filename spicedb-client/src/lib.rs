@@ -2,6 +2,7 @@
 
 pub mod builder;
 mod client;
+pub mod reader;
 pub mod result;
 #[cfg(feature = "futures")]
 pub mod stream;

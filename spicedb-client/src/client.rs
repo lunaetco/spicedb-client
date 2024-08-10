@@ -1,13 +1,7 @@
 use bytes::Bytes;
 use spicedb_grpc::authzed::api::v1::{
     permissions_service_client::PermissionsServiceClient,
-    schema_service_client::SchemaServiceClient, watch_service_client::WatchServiceClient,
-    CheckBulkPermissionsRequest, CheckBulkPermissionsResponse, CheckPermissionRequest,
-    CheckPermissionResponse, DeleteRelationshipsRequest, DeleteRelationshipsResponse,
-    ExpandPermissionTreeRequest, ExpandPermissionTreeResponse, LookupResourcesRequest,
-    LookupResourcesResponse, LookupSubjectsRequest, LookupSubjectsResponse,
-    ReadRelationshipsRequest, ReadRelationshipsResponse, ReadSchemaRequest, WatchRequest,
-    WatchResponse, WriteRelationshipsRequest, WriteRelationshipsResponse, WriteSchemaRequest,
+    schema_service_client::SchemaServiceClient, watch_service_client::WatchServiceClient, *,
 };
 use tonic::{
     metadata::{Ascii, MetadataValue},
@@ -70,7 +64,7 @@ impl SpicedbClient {
     /// Errors include:
     /// - INVALID_ARGUMENT: a provided value has failed to semantically validate
     /// - NOT_FOUND: no schema has been defined
-    pub async fn read_schema(&mut self) -> Result<(String, Option<String>)> {
+    pub async fn read_schema(&mut self) -> Result<ReadSchemaResponse> {
         let response = self
             .schemas
             .read_schema(ReadSchemaRequest {})
@@ -78,12 +72,11 @@ impl SpicedbClient {
             .unwrap()
             .into_inner();
 
-        let token = response.read_at.map(|token| token.token);
-        Ok((response.schema_text, token))
+        Ok(response)
     }
 
     /// Overwrite the current Object Definitions for a Permissions System.
-    pub async fn write_schema(&mut self, schema: impl ToString) -> Result<Option<String>> {
+    pub async fn write_schema(&mut self, schema: impl ToString) -> Result<WriteSchemaResponse> {
         let response = self
             .schemas
             .write_schema(WriteSchemaRequest {
@@ -92,8 +85,7 @@ impl SpicedbClient {
             .await?
             .into_inner();
 
-        let token = response.written_at.map(|token| token.token);
-        Ok(token)
+        Ok(response)
     }
 
     /// Read a set of the relationships matching one or more filters.
@@ -255,6 +247,8 @@ mod test {
 
     use tokio::test;
 
+    use crate::reader::*;
+
     use super::*;
 
     #[test]
@@ -282,15 +276,18 @@ definition document {
 "#;
 
         // Write schema
-        let token = client.write_schema(schema).await.unwrap();
-        assert!(token.is_some());
+        let response = client.write_schema(schema).await.unwrap();
+        assert!(response.written_at().is_some());
 
         // Read schema
-        let (read_schema, token) = client.read_schema().await.unwrap();
+        let response = client.read_schema().await.unwrap();
         assert_eq!(
-            read_schema.split_whitespace().collect::<Vec<_>>(),
+            response
+                .schema_text()
+                .split_whitespace()
+                .collect::<Vec<_>>(),
             schema.split_whitespace().collect::<Vec<_>>()
         );
-        assert!(token.is_some());
+        assert!(response.read_at().is_some());
     }
 }
