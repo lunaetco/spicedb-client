@@ -1,5 +1,5 @@
 services:
-  spicedb-grpc:
+  spicedb-client:
     image: ghcr.io/lunaetco/devcontainer
 
     environment:
@@ -15,12 +15,12 @@ services:
       # Zed CLI
       ZED_KEYRING_PASSWORD: spicedb
 
-      # spicedb-grpc tests
+      # spicedb-client tests
       SPICEDB_URL: http://spicedb:50051
       SPICEDB_PRESHARED_KEY: spicedb
 
     volumes:
-      - ..:/workspaces/spicedb-grpc:cached
+      - ..:/workspaces/spicedb-client:cached
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

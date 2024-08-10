@@ -1,10 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 {
-  "name": "spicedb-grpc",
+  "name": "spicedb-client",
 
   "dockerComposeFile": "docker-compose.yaml",
-  "service": "spicedb-grpc",
-  "workspaceFolder": "/workspaces/spicedb-grpc",
+  "service": "spicedb-client",
+  "workspaceFolder": "/workspaces/spicedb-client",
   "remoteUser": "vscode",
 
   "postCreateCommand": "zed context set default spicedb:50051 spicedb --insecure",
