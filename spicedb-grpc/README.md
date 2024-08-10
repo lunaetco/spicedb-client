@@ -13,7 +13,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-spicedb-grpc = "0.1.0"
+spicedb-grpc = "0.1.1"
 ```
 
 ## Usage

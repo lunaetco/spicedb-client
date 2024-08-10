@@ -1,6 +1,9 @@
 # spicedb-client
 
-Ergonomic(-ish) Rust client for the SpiceDB gRPC API.
+Experimental ergonomic(-ish) Rust client for the SpiceDB gRPC API.
+
+> [!WARNING]
+> Experimental!
 
 ## Features
 
@@ -13,7 +16,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-spicedb-client = "0.1.0"
+spicedb-client = "0.1.1"
 ```
 
 ## Usage

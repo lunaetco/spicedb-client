@@ -3,7 +3,7 @@ members = ["spicedb-client", "spicedb-grpc"]
 resolver = "2"
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "Apache-2.0"
 repository = "https://github.com/lunaetco/spicedb-grpc"
@@ -15,6 +15,7 @@ futures = { version = "0.3.30", default-features = false }
 http = "1.1.0"
 prost = "0.13.1"
 prost-types = "0.13.1"
+spicedb-grpc = { version = "0.1.1", path = "spicedb-grpc" }
 thiserror = "1.0"
 tokio = "1"
 tonic = { version = "0.12.1", default-features = false }

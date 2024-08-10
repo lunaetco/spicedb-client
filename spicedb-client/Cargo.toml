@@ -14,7 +14,7 @@ futures = { workspace = true, optional = true, features = ["std"] }
 http.workspace = true
 prost.workspace = true
 prost-types.workspace = true
-spicedb-grpc = { path = "../spicedb-grpc" }
+spicedb-grpc.workspace = true
 thiserror.workspace = true
 tonic.workspace = true
 
