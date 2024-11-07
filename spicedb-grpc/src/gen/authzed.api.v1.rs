@@ -2,7 +2,6 @@
 /// Relationship specifies how a resource relates to a subject. Relationships
 /// form the data for the graph over which all permissions questions are
 /// answered.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Relationship {
     /// resource is the resource to which the subject is related, in some manner
@@ -21,7 +20,6 @@ pub struct Relationship {
 /// ContextualizedCaveat represents a reference to a caveat to be used by caveated relationships.
 /// The context consists of key-value pairs that will be injected at evaluation time.
 /// The keys must match the arguments defined on the caveat in the schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ContextualizedCaveat {
     /// caveat_name is the name of the caveat expression to use, as defined in the schema
@@ -34,7 +32,6 @@ pub struct ContextualizedCaveat {
 /// SubjectReference is used for referring to the subject portion of a
 /// Relationship. The relation component is optional and is used for defining a
 /// sub-relation on the subject, e.g. group:123#members
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectReference {
     #[prost(message, optional, tag = "1")]
@@ -43,7 +40,6 @@ pub struct SubjectReference {
     pub optional_relation: ::prost::alloc::string::String,
 }
 /// ObjectReference is used to refer to a specific object in the system.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ObjectReference {
     #[prost(string, tag = "1")]
@@ -55,7 +51,6 @@ pub struct ObjectReference {
 /// requests.
 ///
 /// See the authzed.api.v1.Consistency message for more information.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ZedToken {
     #[prost(string, tag = "1")]
@@ -63,7 +58,6 @@ pub struct ZedToken {
 }
 /// Cursor is used to provide resumption of listing between calls to APIs
 /// such as LookupResources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Cursor {
     #[prost(string, tag = "1")]
@@ -80,7 +74,6 @@ pub struct Cursor {
 ///
 /// DELETE will delete the relationship. If the relationship does not exist,
 /// this operation will no-op.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RelationshipUpdate {
     #[prost(enumeration = "relationship_update::Operation", tag = "1")]
@@ -115,10 +108,10 @@ pub mod relationship_update {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::Create => "OPERATION_CREATE",
-                Operation::Touch => "OPERATION_TOUCH",
-                Operation::Delete => "OPERATION_DELETE",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::Create => "OPERATION_CREATE",
+                Self::Touch => "OPERATION_TOUCH",
+                Self::Delete => "OPERATION_DELETE",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -135,7 +128,6 @@ pub mod relationship_update {
 }
 /// PermissionRelationshipTree is used for representing a tree of a resource and
 /// its permission relationships with other objects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PermissionRelationshipTree {
     #[prost(message, optional, tag = "3")]
@@ -147,7 +139,6 @@ pub struct PermissionRelationshipTree {
 }
 /// Nested message and enum types in `PermissionRelationshipTree`.
 pub mod permission_relationship_tree {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TreeType {
         #[prost(message, tag = "1")]
@@ -166,7 +157,6 @@ pub mod permission_relationship_tree {
 ///
 /// EXCLUSION is a logical set containing only the subject members which are
 /// present in the first operand, and none of the other operands.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlgebraicSubjectSet {
     #[prost(enumeration = "algebraic_subject_set::Operation", tag = "1")]
@@ -201,10 +191,10 @@ pub mod algebraic_subject_set {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::Union => "OPERATION_UNION",
-                Operation::Intersection => "OPERATION_INTERSECTION",
-                Operation::Exclusion => "OPERATION_EXCLUSION",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::Union => "OPERATION_UNION",
+                Self::Intersection => "OPERATION_INTERSECTION",
+                Self::Exclusion => "OPERATION_EXCLUSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -220,7 +210,6 @@ pub mod algebraic_subject_set {
     }
 }
 /// DirectSubjectSet is a subject set which is simply a collection of subjects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DirectSubjectSet {
     #[prost(message, repeated, tag = "1")]
@@ -228,7 +217,6 @@ pub struct DirectSubjectSet {
 }
 /// PartialCaveatInfo carries information necessary for the client to take action
 /// in the event a response contains a partially evaluated caveat
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartialCaveatInfo {
     /// missing_required_context is a list of one or more fields that were missing and prevented caveats
@@ -244,7 +232,6 @@ pub struct PartialCaveatInfo {
 /// The specific debug information returned will depend on the type of the API call made.
 ///
 /// See the github.com/authzed/authzed-go project for the specific header and footer names.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DebugInformation {
     /// check holds debug information about a check request.
@@ -256,7 +243,6 @@ pub struct DebugInformation {
 }
 /// CheckDebugTrace is a recursive trace of the requests made for resolving a CheckPermission
 /// API call.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckDebugTrace {
     /// resource holds the resource on which the Check was performed.
@@ -287,7 +273,6 @@ pub struct CheckDebugTrace {
 }
 /// Nested message and enum types in `CheckDebugTrace`.
 pub mod check_debug_trace {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SubProblems {
         #[prost(message, repeated, tag = "1")]
@@ -317,9 +302,9 @@ pub mod check_debug_trace {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                PermissionType::Unspecified => "PERMISSION_TYPE_UNSPECIFIED",
-                PermissionType::Relation => "PERMISSION_TYPE_RELATION",
-                PermissionType::Permission => "PERMISSION_TYPE_PERMISSION",
+                Self::Unspecified => "PERMISSION_TYPE_UNSPECIFIED",
+                Self::Relation => "PERMISSION_TYPE_RELATION",
+                Self::Permission => "PERMISSION_TYPE_PERMISSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -357,12 +342,10 @@ pub mod check_debug_trace {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Permissionship::Unspecified => "PERMISSIONSHIP_UNSPECIFIED",
-                Permissionship::NoPermission => "PERMISSIONSHIP_NO_PERMISSION",
-                Permissionship::HasPermission => "PERMISSIONSHIP_HAS_PERMISSION",
-                Permissionship::ConditionalPermission => {
-                    "PERMISSIONSHIP_CONDITIONAL_PERMISSION"
-                }
+                Self::Unspecified => "PERMISSIONSHIP_UNSPECIFIED",
+                Self::NoPermission => "PERMISSIONSHIP_NO_PERMISSION",
+                Self::HasPermission => "PERMISSIONSHIP_HAS_PERMISSION",
+                Self::ConditionalPermission => "PERMISSIONSHIP_CONDITIONAL_PERMISSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -379,7 +362,6 @@ pub mod check_debug_trace {
         }
     }
     /// resolution holds information about how the problem was resolved.
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Resolution {
         /// was_cached_result, if true, indicates that the result was found in the cache and returned directly.
@@ -392,7 +374,6 @@ pub mod check_debug_trace {
     }
 }
 /// CaveatEvalInfo holds information about a caveat expression that was evaluated.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CaveatEvalInfo {
     /// expression is the expression that was evaluated.
@@ -439,11 +420,11 @@ pub mod caveat_eval_info {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Result::Unspecified => "RESULT_UNSPECIFIED",
-                Result::Unevaluated => "RESULT_UNEVALUATED",
-                Result::False => "RESULT_FALSE",
-                Result::True => "RESULT_TRUE",
-                Result::MissingSomeContext => "RESULT_MISSING_SOME_CONTEXT",
+                Self::Unspecified => "RESULT_UNSPECIFIED",
+                Self::Unevaluated => "RESULT_UNEVALUATED",
+                Self::False => "RESULT_FALSE",
+                Self::True => "RESULT_TRUE",
+                Self::MissingSomeContext => "RESULT_MISSING_SOME_CONTEXT",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -462,7 +443,6 @@ pub mod caveat_eval_info {
 /// Consistency will define how a request is handled by the backend.
 /// By defining a consistency requirement, and a token at which those
 /// requirements should be applied, where applicable.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Consistency {
     #[prost(oneof = "consistency::Requirement", tags = "1, 2, 3, 4")]
@@ -470,7 +450,6 @@ pub struct Consistency {
 }
 /// Nested message and enum types in `Consistency`.
 pub mod consistency {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Requirement {
         /// minimize_latency indicates that the latency for the call should be
@@ -506,7 +485,6 @@ pub mod consistency {
 /// NOTE: The performance of the API will be affected by the selection of fields
 /// on which to filter. If a field is not indexed, the performance of the API
 /// can be significantly slower.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RelationshipFilter {
     /// resource_type is the *optional* resource type of the relationship.
@@ -532,7 +510,6 @@ pub struct RelationshipFilter {
 ///
 /// subject_type is required and all other fields are optional, and will not
 /// impose any additional requirements if left unspecified.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubjectFilter {
     #[prost(string, tag = "1")]
@@ -544,7 +521,6 @@ pub struct SubjectFilter {
 }
 /// Nested message and enum types in `SubjectFilter`.
 pub mod subject_filter {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct RelationFilter {
         #[prost(string, tag = "1")]
@@ -553,7 +529,6 @@ pub mod subject_filter {
 }
 /// ReadRelationshipsRequest specifies one or more filters used to read matching
 /// relationships within the system.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRelationshipsRequest {
     #[prost(message, optional, tag = "1")]
@@ -576,7 +551,6 @@ pub struct ReadRelationshipsRequest {
 /// ReadRelationshipsResponse contains a Relationship found that matches the
 /// specified relationship filter(s). A instance of this response message will
 /// be streamed to the client for each relationship found.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRelationshipsResponse {
     /// read_at is the ZedToken at which the relationship was found.
@@ -598,7 +572,6 @@ pub struct ReadRelationshipsResponse {
 /// relationships filter.
 /// MUST_MATCH will fail the parent request if there are no
 /// relationships that match the filter.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Precondition {
     #[prost(enumeration = "precondition::Operation", tag = "1")]
@@ -632,9 +605,9 @@ pub mod precondition {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Operation::Unspecified => "OPERATION_UNSPECIFIED",
-                Operation::MustNotMatch => "OPERATION_MUST_NOT_MATCH",
-                Operation::MustMatch => "OPERATION_MUST_MATCH",
+                Self::Unspecified => "OPERATION_UNSPECIFIED",
+                Self::MustNotMatch => "OPERATION_MUST_NOT_MATCH",
+                Self::MustMatch => "OPERATION_MUST_MATCH",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -652,7 +625,6 @@ pub mod precondition {
 /// should be applied to the service. If the optional_preconditions parameter
 /// is included, all of the specified preconditions must also be satisfied before
 /// the write will be committed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteRelationshipsRequest {
     #[prost(message, repeated, tag = "1")]
@@ -661,7 +633,6 @@ pub struct WriteRelationshipsRequest {
     #[prost(message, repeated, tag = "2")]
     pub optional_preconditions: ::prost::alloc::vec::Vec<Precondition>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteRelationshipsResponse {
     #[prost(message, optional, tag = "1")]
@@ -672,7 +643,6 @@ pub struct WriteRelationshipsResponse {
 /// filters. If the optional_preconditions parameter is included, all of the
 /// specified preconditions must also be satisfied before the delete will be
 /// executed.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRelationshipsRequest {
     #[prost(message, optional, tag = "1")]
@@ -692,7 +662,6 @@ pub struct DeleteRelationshipsRequest {
     #[prost(bool, tag = "4")]
     pub optional_allow_partial_deletions: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteRelationshipsResponse {
     /// deleted_at is the revision at which the relationships were deleted.
@@ -734,9 +703,9 @@ pub mod delete_relationships_response {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                DeletionProgress::Unspecified => "DELETION_PROGRESS_UNSPECIFIED",
-                DeletionProgress::Complete => "DELETION_PROGRESS_COMPLETE",
-                DeletionProgress::Partial => "DELETION_PROGRESS_PARTIAL",
+                Self::Unspecified => "DELETION_PROGRESS_UNSPECIFIED",
+                Self::Complete => "DELETION_PROGRESS_COMPLETE",
+                Self::Partial => "DELETION_PROGRESS_PARTIAL",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -752,7 +721,6 @@ pub mod delete_relationships_response {
 }
 /// CheckPermissionRequest issues a check on whether a subject has a permission
 /// or is a member of a relation, on a specific resource.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckPermissionRequest {
     #[prost(message, optional, tag = "1")]
@@ -776,7 +744,6 @@ pub struct CheckPermissionRequest {
     #[prost(bool, tag = "6")]
     pub with_tracing: bool,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckPermissionResponse {
     #[prost(message, optional, tag = "1")]
@@ -825,12 +792,10 @@ pub mod check_permission_response {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                Permissionship::Unspecified => "PERMISSIONSHIP_UNSPECIFIED",
-                Permissionship::NoPermission => "PERMISSIONSHIP_NO_PERMISSION",
-                Permissionship::HasPermission => "PERMISSIONSHIP_HAS_PERMISSION",
-                Permissionship::ConditionalPermission => {
-                    "PERMISSIONSHIP_CONDITIONAL_PERMISSION"
-                }
+                Self::Unspecified => "PERMISSIONSHIP_UNSPECIFIED",
+                Self::NoPermission => "PERMISSIONSHIP_NO_PERMISSION",
+                Self::HasPermission => "PERMISSIONSHIP_HAS_PERMISSION",
+                Self::ConditionalPermission => "PERMISSIONSHIP_CONDITIONAL_PERMISSION",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -852,7 +817,6 @@ pub mod check_permission_response {
 ///
 /// The ordering of the items in the response is maintained in the response.
 /// Checks with the same subject/permission will automatically be batched for performance optimization.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckBulkPermissionsRequest {
     #[prost(message, optional, tag = "1")]
@@ -860,7 +824,6 @@ pub struct CheckBulkPermissionsRequest {
     #[prost(message, repeated, tag = "2")]
     pub items: ::prost::alloc::vec::Vec<CheckBulkPermissionsRequestItem>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckBulkPermissionsRequestItem {
     #[prost(message, optional, tag = "1")]
@@ -872,7 +835,6 @@ pub struct CheckBulkPermissionsRequestItem {
     #[prost(message, optional, tag = "4")]
     pub context: ::core::option::Option<::prost_types::Struct>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckBulkPermissionsResponse {
     #[prost(message, optional, tag = "1")]
@@ -880,7 +842,6 @@ pub struct CheckBulkPermissionsResponse {
     #[prost(message, repeated, tag = "2")]
     pub pairs: ::prost::alloc::vec::Vec<CheckBulkPermissionsPair>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckBulkPermissionsPair {
     #[prost(message, optional, tag = "1")]
@@ -890,7 +851,6 @@ pub struct CheckBulkPermissionsPair {
 }
 /// Nested message and enum types in `CheckBulkPermissionsPair`.
 pub mod check_bulk_permissions_pair {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         #[prost(message, tag = "2")]
@@ -899,7 +859,6 @@ pub mod check_bulk_permissions_pair {
         Error(super::super::super::super::google::rpc::Status),
     }
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckBulkPermissionsResponseItem {
     #[prost(enumeration = "check_permission_response::Permissionship", tag = "1")]
@@ -914,7 +873,6 @@ pub struct CheckBulkPermissionsResponseItem {
 /// ExpandPermissionTreeRequest is typically used to determine the full set of
 /// subjects with a permission, along with the relationships that grant said
 /// access.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandPermissionTreeRequest {
     #[prost(message, optional, tag = "1")]
@@ -927,7 +885,6 @@ pub struct ExpandPermissionTreeRequest {
     #[prost(string, tag = "3")]
     pub permission: ::prost::alloc::string::String,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExpandPermissionTreeResponse {
     #[prost(message, optional, tag = "1")]
@@ -941,7 +898,6 @@ pub struct ExpandPermissionTreeResponse {
 /// LookupResourcesRequest performs a lookup of all resources of a particular
 /// kind on which the subject has the specified permission or the relation in
 /// which the subject exists, streaming back the IDs of those resources.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupResourcesRequest {
     #[prost(message, optional, tag = "1")]
@@ -973,7 +929,6 @@ pub struct LookupResourcesRequest {
 }
 /// LookupResourcesResponse contains a single matching resource object ID for the
 /// requested object type, permission, and subject.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupResourcesResponse {
     /// looked_up_at is the ZedToken at which the resource was found.
@@ -996,7 +951,6 @@ pub struct LookupResourcesResponse {
 /// LookupSubjectsRequest performs a lookup of all subjects of a particular
 /// kind for which the subject has the specified permission or the relation in
 /// which the subject exists, streaming back the IDs of those subjects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupSubjectsRequest {
     #[prost(message, optional, tag = "1")]
@@ -1078,9 +1032,9 @@ pub mod lookup_subjects_request {
         /// (if the ProtoBuf definition does not change) and safe for programmatic use.
         pub fn as_str_name(&self) -> &'static str {
             match self {
-                WildcardOption::Unspecified => "WILDCARD_OPTION_UNSPECIFIED",
-                WildcardOption::IncludeWildcards => "WILDCARD_OPTION_INCLUDE_WILDCARDS",
-                WildcardOption::ExcludeWildcards => "WILDCARD_OPTION_EXCLUDE_WILDCARDS",
+                Self::Unspecified => "WILDCARD_OPTION_UNSPECIFIED",
+                Self::IncludeWildcards => "WILDCARD_OPTION_INCLUDE_WILDCARDS",
+                Self::ExcludeWildcards => "WILDCARD_OPTION_EXCLUDE_WILDCARDS",
             }
         }
         /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1096,7 +1050,6 @@ pub mod lookup_subjects_request {
 }
 /// LookupSubjectsResponse contains a single matching subject object ID for the
 /// requested subject object type on the permission or relation.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LookupSubjectsResponse {
     #[prost(message, optional, tag = "1")]
@@ -1138,7 +1091,6 @@ pub struct LookupSubjectsResponse {
     pub after_result_cursor: ::core::option::Option<Cursor>,
 }
 /// ResolvedSubject is a single subject resolved within LookupSubjects.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResolvedSubject {
     /// subject_object_id is the Object ID of the subject found. May be a `*` if
@@ -1151,6 +1103,55 @@ pub struct ResolvedSubject {
     /// partial_caveat_info holds information of a partially-evaluated caveated response
     #[prost(message, optional, tag = "3")]
     pub partial_caveat_info: ::core::option::Option<PartialCaveatInfo>,
+}
+/// ImportBulkRelationshipsRequest represents one batch of the streaming
+/// ImportBulkRelationships API. The maximum size is only limited by the backing
+/// datastore, and optimal size should be determined by the calling client
+/// experimentally.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ImportBulkRelationshipsRequest {
+    #[prost(message, repeated, tag = "1")]
+    pub relationships: ::prost::alloc::vec::Vec<Relationship>,
+}
+/// ImportBulkRelationshipsResponse is returned on successful completion of the
+/// bulk load stream, and contains the total number of relationships loaded.
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ImportBulkRelationshipsResponse {
+    #[prost(uint64, tag = "1")]
+    pub num_loaded: u64,
+}
+/// ExportBulkRelationshipsRequest represents a resumable request for
+/// all relationships from the server.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExportBulkRelationshipsRequest {
+    #[prost(message, optional, tag = "1")]
+    pub consistency: ::core::option::Option<Consistency>,
+    /// optional_limit, if non-zero, specifies the limit on the number of
+    /// relationships the server can return in one page. By default, the server
+    /// will pick a page size, and the server is free to choose a smaller size
+    /// at will.
+    #[prost(uint32, tag = "2")]
+    pub optional_limit: u32,
+    /// optional_cursor, if specified, indicates the cursor after which results
+    /// should resume being returned. The cursor can be found on the
+    /// BulkExportRelationshipsResponse object.
+    #[prost(message, optional, tag = "3")]
+    pub optional_cursor: ::core::option::Option<Cursor>,
+    /// optional_relationship_filter, if specified, indicates the
+    /// filter to apply to each relationship to be exported.
+    #[prost(message, optional, tag = "4")]
+    pub optional_relationship_filter: ::core::option::Option<RelationshipFilter>,
+}
+/// ExportBulkRelationshipsResponse is one page in a stream of relationship
+/// groups that meet the criteria specified by the originating request. The
+/// server will continue to stream back relationship groups as quickly as it can
+/// until all relationships have been transmitted back.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExportBulkRelationshipsResponse {
+    #[prost(message, optional, tag = "1")]
+    pub after_result_cursor: ::core::option::Option<Cursor>,
+    #[prost(message, repeated, tag = "2")]
+    pub relationships: ::prost::alloc::vec::Vec<Relationship>,
 }
 /// LookupPermissionship represents whether a Lookup response was partially evaluated or not
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1167,11 +1168,9 @@ impl LookupPermissionship {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LookupPermissionship::Unspecified => "LOOKUP_PERMISSIONSHIP_UNSPECIFIED",
-            LookupPermissionship::HasPermission => "LOOKUP_PERMISSIONSHIP_HAS_PERMISSION",
-            LookupPermissionship::ConditionalPermission => {
-                "LOOKUP_PERMISSIONSHIP_CONDITIONAL_PERMISSION"
-            }
+            Self::Unspecified => "LOOKUP_PERMISSIONSHIP_UNSPECIFIED",
+            Self::HasPermission => "LOOKUP_PERMISSIONSHIP_HAS_PERMISSION",
+            Self::ConditionalPermission => "LOOKUP_PERMISSIONSHIP_CONDITIONAL_PERMISSION",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1188,7 +1187,13 @@ impl LookupPermissionship {
 }
 /// Generated client implementations.
 pub mod permissions_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// PermissionsService implements a set of RPCs that perform operations on
@@ -1212,8 +1217,8 @@ pub mod permissions_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1238,7 +1243,7 @@ pub mod permissions_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             PermissionsServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1286,8 +1291,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1319,8 +1323,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1353,8 +1356,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1385,8 +1387,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1417,8 +1418,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1450,8 +1450,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1482,8 +1481,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1514,8 +1512,7 @@ pub mod permissions_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1533,15 +1530,84 @@ pub mod permissions_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        /// ImportBulkRelationships is a faster path to writing a large number of
+        /// relationships at once. It is both batched and streaming. For maximum
+        /// performance, the caller should attempt to write relationships in as close
+        /// to relationship sort order as possible: (resource.object_type,
+        /// resource.object_id, relation, subject.object.object_type,
+        /// subject.object.object_id, subject.optional_relation)
+        pub async fn import_bulk_relationships(
+            &mut self,
+            request: impl tonic::IntoStreamingRequest<
+                Message = super::ImportBulkRelationshipsRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<super::ImportBulkRelationshipsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/authzed.api.v1.PermissionsService/ImportBulkRelationships",
+            );
+            let mut req = request.into_streaming_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "authzed.api.v1.PermissionsService",
+                        "ImportBulkRelationships",
+                    ),
+                );
+            self.inner.client_streaming(req, path, codec).await
+        }
+        /// ExportBulkRelationships is the fastest path available to exporting
+        /// relationships from the server. It is resumable, and will return results
+        /// in an order determined by the server.
+        pub async fn export_bulk_relationships(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ExportBulkRelationshipsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::ExportBulkRelationshipsResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/authzed.api.v1.PermissionsService/ExportBulkRelationships",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "authzed.api.v1.PermissionsService",
+                        "ExportBulkRelationships",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// ReadSchemaRequest returns the schema from the database.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ReadSchemaRequest {}
 /// ReadSchemaResponse is the resulting data after having read the Object
 /// Definitions from a Schema.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadSchemaResponse {
     /// schema_text is the textual form of the current schema in the system
@@ -1553,7 +1619,6 @@ pub struct ReadSchemaResponse {
 }
 /// WriteSchemaRequest is the required data used to "upsert" the Schema of a
 /// Permissions System.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteSchemaRequest {
     /// The Schema containing one or more Object Definitions that will be written
@@ -1565,7 +1630,6 @@ pub struct WriteSchemaRequest {
 }
 /// WriteSchemaResponse is the resulting data after having written a Schema to
 /// a Permissions System.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WriteSchemaResponse {
     /// written_at is the ZedToken at which the schema was written.
@@ -1574,7 +1638,13 @@ pub struct WriteSchemaResponse {
 }
 /// Generated client implementations.
 pub mod schema_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// SchemaService implements operations on a Permissions System's Schema.
@@ -1597,8 +1667,8 @@ pub mod schema_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1623,7 +1693,7 @@ pub mod schema_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             SchemaServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1674,8 +1744,7 @@ pub mod schema_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1700,8 +1769,7 @@ pub mod schema_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -1719,7 +1787,6 @@ pub mod schema_service_client {
 /// WatchRequest specifies the object definitions for which we want to start
 /// watching mutations, and an optional start snapshot for when to start
 /// watching.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WatchRequest {
     /// optional_object_types is a filter of resource object types to watch for changes.
@@ -1748,7 +1815,6 @@ pub struct WatchRequest {
 /// timestamp order, from the requested start snapshot to a snapshot
 /// encoded in the watch response. The client can use the snapshot to resume
 /// watching where the previous watch response left off.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WatchResponse {
     #[prost(message, repeated, tag = "1")]
@@ -1758,7 +1824,13 @@ pub struct WatchResponse {
 }
 /// Generated client implementations.
 pub mod watch_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
@@ -1780,8 +1852,8 @@ pub mod watch_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -1806,7 +1878,7 @@ pub mod watch_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             WatchServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -1852,8 +1924,7 @@ pub mod watch_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
