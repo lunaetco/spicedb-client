@@ -25,3 +25,4 @@ tokio = { workspace = true, features = ["full"] }
 default = []
 
 futures = ["dep:futures"]
+tls = ["tonic/tls-webpki-roots"]

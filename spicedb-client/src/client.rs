@@ -6,7 +6,7 @@ use spicedb_grpc::authzed::api::v1::{
 use tonic::{
     metadata::{Ascii, MetadataValue},
     service::{interceptor::InterceptedService, Interceptor},
-    transport::Channel,
+    transport::{Channel, Endpoint},
     Request, Status, Streaming,
 };
 
@@ -42,7 +42,7 @@ impl SpicedbClient {
             preshared_key: Box::new(format!("bearer {}", preshared_key.to_string()).parse()?),
         };
 
-        let channel = Channel::from_shared(url)?.connect().await?;
+        let channel = Endpoint::new(url.into())?.connect().await?;
 
         let schemas = SchemaServiceClient::with_interceptor(channel.clone(), interceptor.clone());
 
