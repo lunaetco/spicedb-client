@@ -68,8 +68,7 @@ impl SpicedbClient {
         let response = self
             .schemas
             .read_schema(ReadSchemaRequest {})
-            .await
-            .unwrap()
+            .await?
             .into_inner();
 
         Ok(response)
